@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhonghui.web.mapper.MaterialClassifyMapper">
+
+    <resultMap id="tree" type="com.zhonghui.web.entity.MaterialClassify">
+        <id column="id" property="id"></id>
+        <result column="pid" property="pid"></result>
+        <result column="name" property="name"></result>
+        <result column="code" property="code"></result>
+        <result column="remark" property="remark"></result>
+        <collection property="list" select="getById" column="id">
+            <id column="id" property="id"></id>
+            <result column="pid" property="pid"></result>
+            <result column="name" property="name"></result>
+            <result column="code" property="code"></result>
+            <result column="remark" property="remark"></result>
+        </collection>
+    </resultMap>
+
+    <select id="getById" resultType="com.zhonghui.web.entity.MaterialClassify">
+        select *
+        from wms_material_classify
+        where pid = #{id}
+    </select>
+    <select id="buildTree" resultType="com.zhonghui.web.entity.MaterialClassify">
+        select *
+        from wms_material_classify
+        where id = 0
+    </select>
+</mapper>

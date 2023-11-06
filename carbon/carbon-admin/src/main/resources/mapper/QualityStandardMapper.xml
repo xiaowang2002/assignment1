@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhonghui.web.mapper.QualityStandardMapper">
+    <insert id="addOne">
+        insert into qualitystandard
+        values(null,)
+    </insert>
+
+    <delete id="removeById">
+        delete from qualitystandard
+        where id = #{id}
+    </delete>
+
+    <select id="queryAll" resultType="com.zhonghui.web.entity.QualityStandard">
+        select *
+        from qualitystandard
+        <where>
+            <if test="materialName != null and materialName != ''">and material_name like concat('%'
+                ,#{materialName},'%')
+            </if>
+            <if test="inspectionItem != null and inspectionItem != ''">and inspection_item like
+                concat('%',#{inspectionItem},'%')
+            </if>
+            <if test="inspectionType != null and inspectionType != ''">and inspection_type like
+                ('%',#{inspectionType},'%')
+            </if>
+        </where>
+    </select>
+</mapper>
